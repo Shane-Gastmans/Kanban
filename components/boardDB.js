@@ -1,7 +1,6 @@
 import React from 'react';
 
-export const getBoards = async (userId) => {
-    let t = []
+export const getBoards = async (userId, setBoards) => {
     await fetch("https://kanbanproject-328107.appspot.com/getBoards", {
       method:'POST',
       headers:{
@@ -10,6 +9,5 @@ export const getBoards = async (userId) => {
       body:JSON.stringify({"userId": userId})
     })
     .then(parameter=>parameter.json())
-    .then(anotherParameter=>anotherParameter.forEach(obj => {t.push({"boardId": obj.boardId, "boardName": obj.boardName})}));
-    return t
+    .then(json=>setBoards(json));
 }
