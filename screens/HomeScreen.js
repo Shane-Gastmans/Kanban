@@ -1,7 +1,15 @@
-import React from 'react';
-import { Text, View, Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, Button, FlatList } from 'react-native';
+import { getBoards } from '../components/boardDB';
+import { getUsers } from '../components/userDB';
 
 export default function HomeScreen(props){
+
+  const [boards, setBoards] = useState();
+
+  useEffect(() => {
+    getBoards(props.userId, setBoards);
+  }, [])
 
     return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -10,6 +18,11 @@ export default function HomeScreen(props){
           onPress={() => props.navigation.navigate('BoardScreen')}
           title="GO TO BOARD SCREEN"
         />
+        <FlatList data={boards} style={{margin: 10}}
+            renderItem={({item}) => (
+                    <Text onPress={() => props.navigation.navigate("BoardScreen", {boardId: item.boardId})}>{item.boardName}</Text>
+            )}
+            keyExtractor={(item) => item.boardId.toString()} />
     </View>
     );
 }
