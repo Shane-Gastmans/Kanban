@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,10 +17,10 @@ export default function App() {
     <RootStack.Navigator>
       <RootStack.Group>
         <RootStack.Screen name="LoginScreen">
-          {props => <LoginScreen {...props} setUserId={setUserId} />}
+          {props => <LoginScreen {...props} userId={userId} setUserId={setUserId} />}
         </RootStack.Screen>
         <RootStack.Screen name="HomeScreen">
-          {props => <HomeScreen {...props} userId={userId} />}
+          {props => <HomeScreen {...props} userId={userId} setUserId={setUserId} />}
         </RootStack.Screen>
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>

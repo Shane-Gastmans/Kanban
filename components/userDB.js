@@ -18,15 +18,13 @@ export const createUser = async (userName) => {
     });
 }
 
-export const d = async (userId) => {
-    let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/deleteUser",
-    {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({"userId": userId})
-    });
+export const getUsersForLogin = async (userString, setUserId) => {
+  await fetch("https://kanbanproject-328107.appspot.com/getUsers")
+  .then(parameter=>parameter.json())
+  .then(json=>{json.forEach(e => {
+    if (e.userName == userString) {
+      setUserId(e.userId)
+    }
+  })});
 }
 
