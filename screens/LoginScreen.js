@@ -9,13 +9,13 @@ export default function LoginScreen(props){
     }, [])
 
     return (
-    <View style={styles.screen}>
-        <TextInput style={styles.inputStyle} placeholder="Your username" />
-        <Button
-            onPress={() => props.navigation.navigate('HomeScreen')}
-            title="GO TO HOME"
-        />
-</View>
+        <View style={styles.screen}>
+            <TextInput style={styles.inputStyle} placeholder="Your username" />
+            <Button
+                onPress={() => props.navigation.navigate('HomeScreen')}
+                title="GO TO HOME"
+            />
+        </View>
     );
 }
 

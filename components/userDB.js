@@ -18,7 +18,7 @@ export const createUser = async (userName) => {
     });
 }
 
-export const d = async (userId) => {
+export const deleteUser = async (userId) => {
     let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/deleteUser",
     {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, Button, FlatList } from 'react-native';
+import React, { useState, useEffect, useReducer } from 'react';
+import { Text, View, Button, FlatList, StyleSheet } from 'react-native';
 import { getBoards } from '../components/boardDB';
 import { getUsers } from '../components/userDB';
 
@@ -12,17 +12,36 @@ export default function HomeScreen(props){
   }, [])
 
     return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
+    <View style={styles.screen}>
+        <Text style={{ fontSize: 30 }}>BOARDS</Text>
         <Button
-          onPress={() => props.navigation.navigate('BoardScreen')}
-          title="GO TO BOARD SCREEN"
+            onPress={() => props.navigation.navigate('NewBoard', { userId: props.userId })}
+            title="ADD NEW BOARD"
         />
         <FlatList data={boards} style={{margin: 10}}
             renderItem={({item}) => (
-                    <Text onPress={() => props.navigation.navigate("BoardScreen", {boardId: item.boardId})}>{item.boardName}</Text>
+                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId })}>{item.boardName}</Text></View>
             )}
             keyExtractor={(item) => item.boardId.toString()} />
     </View>
     );
 }
+
+const styles = StyleSheet.create({
+    screen: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+
+    element: {
+        padding: 10,
+    },
+
+    boardStyle: {
+        borderWidth: 2,
+        borderColor: 'green',
+        padding: 10,
+        width: '100%',
+    },
+});

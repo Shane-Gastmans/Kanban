@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import BoardScreen from './screens/BoardScreen';
+import NewBoard from './screens/NewBoard';
 
 const RootStack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
       </RootStack.Group>
       <RootStack.Group screenOptions={{ presentation: 'modal' }}>
         <RootStack.Screen name="BoardScreen" component={BoardScreen} />
+        <RootStack.Screen name="NewBoard" component={NewBoard} userId={userId}/>
       </RootStack.Group>
     </RootStack.Navigator>
     </NavigationContainer>
