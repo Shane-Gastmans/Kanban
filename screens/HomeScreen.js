@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, FlatList } from 'react-native';
+import { Text, View, Button, FlatList, Alert } from 'react-native';
 import { getBoards } from '../components/boardDB';
 import { getUsers } from '../components/userDB';
 
@@ -10,6 +10,27 @@ export default function HomeScreen(props){
   useEffect(() => {
     getBoards(props.userId, setBoards);
   }, [])
+
+  useEffect(
+    () =>
+      props.navigation.addListener('beforeRemove', (e) => {
+        e.preventDefault();
+
+        Alert.alert(
+          'Switch user?',
+          'You are about to switch user, are you sure?',
+          [
+            { text: "No"},
+            {
+              text: 'Switch user',
+              onPress: () => {props.setUserId(null);props.navigation.dispatch(e.data.action)},
+            },
+          ]
+        );
+      }),
+    [props.navigation]
+  );
+
 
     return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
