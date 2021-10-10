@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextInput, Button, View } from 'react-native';
 import { getUsersForLogin } from '../components/userDB';
 
+
 export default function LoginScreen(props){
 
     const [userString, setUserString] = useState();
@@ -21,6 +22,22 @@ export default function LoginScreen(props){
           onPress={() => getUsersForLogin(userString, props.setUserId)}
           title="GO TO HOME"
         />
-    </View>
+</View>
     );
 }
+
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+
+    inputStyle: {
+        borderWidth: 2,
+        borderColor: 'red',
+        padding: 10,
+        width: '80%',
+    },
+});
