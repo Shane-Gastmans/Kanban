@@ -40,7 +40,7 @@ export default function HomeScreen(props){
         />
         <FlatList data={boards} style={{margin: 10}}
             renderItem={({item}) => (
-                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId })}>{item.boardName}</Text></View>
+                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId, boardName: item.boardName })}>{item.boardName}</Text></View>
             )}
             keyExtractor={(item) => item.boardId.toString()} />
     </View>
