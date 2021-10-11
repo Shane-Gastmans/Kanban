@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\components",
+    "\\screens"
   ],
+  "SelectedNode": "\\components\\cardDB.js",
   "PreviewInSolutionExplorer": false
 }
