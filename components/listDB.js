@@ -14,7 +14,7 @@ export const getLists = async (boardId, setLists) => {
 
 export const createList = async (boardId, listName) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/createUser",
+    await fetch("https://kanbanproject-328107.appspot.com/createList",
         {
             method: 'POST',
             headers: {
@@ -26,7 +26,7 @@ export const createList = async (boardId, listName) => {
 
 export const deleteList = async (listId) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/deleteUser",
+    await fetch("https://kanbanproject-328107.appspot.com/deleteList",
         {
             method: 'POST',
             headers: {

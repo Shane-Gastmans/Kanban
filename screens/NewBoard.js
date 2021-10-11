@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { TextInput, View, Modal, Button, FlatList, StyleSheet } from 'react-native';
+import React, { useState} from 'react';
+import { TextInput, View, Button, StyleSheet } from 'react-native';
 import { createBoard } from '../components/boardDB';
 
 export default function NewBoard(props) {
@@ -17,7 +17,7 @@ export default function NewBoard(props) {
 
     return (
         <View style={styles.screen}>
-            <TextInput style={styles.inputStyle} placeholder="Your username" onChangeText={nameHandler} />
+            <TextInput style={styles.inputStyle} placeholder="New Board Name" onChangeText={nameHandler} />
             <Button
                 onPress={saveNewBoard}
                 title="ADD BOARD"

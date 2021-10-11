@@ -38,7 +38,7 @@ export const deleteBoard = async (userId, boardId) => {
 
 export const addUserToBoard = async (userID, boardID) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/createBoard",
+    await fetch("https://kanbanproject-328107.appspot.com/addUserToBoard",
         {
             method: 'POST',
             headers: {

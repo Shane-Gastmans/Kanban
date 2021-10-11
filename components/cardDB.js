@@ -14,7 +14,7 @@ export const getCards = async (listId, setCards) => {
 
 export const createCard = async (listId, cardTitle, cardContent, cardDate) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/createUser",
+    await fetch("https://kanbanproject-328107.appspot.com/createCard",
         {
             method: 'POST',
             headers: {
@@ -26,7 +26,7 @@ export const createCard = async (listId, cardTitle, cardContent, cardDate) => {
 
 export const deleteCard = async (cardId) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/deleteUser",
+    await fetch("https://kanbanproject-328107.appspot.com/deleteCard",
         {
             method: 'POST',
             headers: {
@@ -38,7 +38,7 @@ export const deleteCard = async (cardId) => {
 
 export const cardToList = async (listId, cardId) => {
     let userArr = []
-    await fetch("https://kanbanproject-328107.appspot.com/createBoard",
+    await fetch("https://kanbanproject-328107.appspot.com/cardToList",
         {
             method: 'POST',
             headers: {
