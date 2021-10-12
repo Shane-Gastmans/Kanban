@@ -39,8 +39,8 @@ export default function HomeScreen(props){
             title="ADD NEW BOARD"
         />
         <FlatList data={boards} style={{margin: 10}}
-            renderItem={({item}) => (
-                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId, boardName: item.boardName })}>{item.boardName}</Text></View>
+            renderItem={({ item }) => (
+                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId, boardName: item.boardName, userId: props.userId })}>{item.boardName}</Text></View>
             )}
             keyExtractor={(item) => item.boardId.toString()} />
     </View>

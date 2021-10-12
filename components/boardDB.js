@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const getBoards = async (userId, setBoards) => {
     await fetch("https://kanbanproject-328107.appspot.com/getBoards", {
@@ -13,7 +12,6 @@ export const getBoards = async (userId, setBoards) => {
 }
 
 export const createBoard = async (userID, boardName) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/createBoard",
         {
             method: 'POST',
@@ -25,7 +23,6 @@ export const createBoard = async (userID, boardName) => {
 }
 
 export const deleteBoard = async (userId, boardId) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/deleteBoard",
         {
             method: 'POST',
@@ -37,7 +34,6 @@ export const deleteBoard = async (userId, boardId) => {
 }
 
 export const addUserToBoard = async (userID, boardID) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/addUserToBoard",
         {
             method: 'POST',

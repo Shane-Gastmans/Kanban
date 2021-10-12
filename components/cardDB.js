@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const getCards = async (listId, setCards) => {
     await fetch("https://kanbanproject-328107.appspot.com/getCards", {
@@ -12,8 +11,9 @@ export const getCards = async (listId, setCards) => {
     .then(json=>setCards(json));
 }
 
-export const createCard = async (listId, cardTitle, cardContent, cardDate) => {
-    let userArr = []
+export const createCard = async (listId, cardTitle, cardContent) => {
+    let now = new Date();
+    let cardDate = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate() + " " + ('0' + now.getHours()).slice(-2) + ":" + ('0' + now.getMinutes()).slice(-2) + ":" + ('0' + now.getSeconds()).slice(-2);
     await fetch("https://kanbanproject-328107.appspot.com/createCard",
         {
             method: 'POST',
@@ -25,7 +25,6 @@ export const createCard = async (listId, cardTitle, cardContent, cardDate) => {
 }
 
 export const deleteCard = async (cardId) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/deleteCard",
         {
             method: 'POST',
@@ -37,7 +36,6 @@ export const deleteCard = async (cardId) => {
 }
 
 export const cardToList = async (listId, cardId) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/cardToList",
         {
             method: 'POST',

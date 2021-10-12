@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, FlatList, StyleSheet, View, Modal, Button } from 'react-native';
-import { getCards, cardToList } from './cardDB';
+import { Text, FlatList, StyleSheet, View, Modal, Button, Alert } from 'react-native';
+import { getCards, cardToList, deleteCard } from './cardDB';
 
 export default function Card(props) {
 
@@ -24,6 +24,25 @@ export default function Card(props) {
     const moveCard = (listId) => {
         cardToList(listId, id);
         setMoveVisible(!modalMove);
+    }
+
+    const cardDeletion = () => {
+        Alert.alert(
+            'Delete Card?',
+            'Are you sure you want to delete this card?',
+            [
+                {
+                    text: "No"
+                },
+                {
+                    text: 'Delete Card',
+                    onPress: () => {
+                        deleteCard(id);
+                        setDetailsVisible(!modalDetails);
+                    },
+                },
+            ]
+        );
     }
 
     useEffect(() => {
@@ -54,6 +73,9 @@ export default function Card(props) {
                         </View>
                         <View style={styles.padd}>
                             <Button title="MOVE TO LIST" onPress={() => setMoveVisible(!modalMove)} />
+                        </View>
+                        <View style={styles.padd}>
+                            <Button title="DELETE" onPress={() => cardDeletion()} />
                         </View>
                     </View>
                 </View>
