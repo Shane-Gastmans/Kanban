@@ -8,6 +8,12 @@ export default function HomeScreen(props){
     const [boards, setBoards] = useState();
     const [newBoardName, setBoardName] = useState("");
     const [addBoard, setAddBoard] = useState(false);
+    const [reload, setReload] = useState();
+
+
+
+
+
 
     const nameHandler = (name) => {
         setBoardName(name);
@@ -16,12 +22,21 @@ export default function HomeScreen(props){
     const saveNewBoard = () => {
         createBoard(user, newBoardName);
         setAddBoard(!addBoard);
+        setBoards();
+        setTimeout(() => getBoards(props.userId, setBoards), 200);
+        
     }
 
 
   useEffect(() => {
-      getBoards(props.userId, setBoards);
       setUser(props.userId);
+
+      let listener = props.navigation.addListener('focus', () => {
+          console.log('focussed');
+          getBoards(props.userId, setBoards);
+      });
+
+      return () => listener()
   }, [])
 
   useEffect(

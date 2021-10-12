@@ -56,7 +56,7 @@ export default function BoardScreen(props){
                     text: 'Leave Board',
                     onPress: () => {
                         deleteBoard(userId, boardId);
-                        props.navigation.navigate('HomeScreen');
+                        setTimeout(() => props.navigation.navigate('HomeScreen'), 200);
                     },
                 },
             ]
