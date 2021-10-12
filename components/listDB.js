@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const getLists = async (boardId, setLists) => {
     await fetch("https://kanbanproject-328107.appspot.com/getLists", {
@@ -13,7 +12,6 @@ export const getLists = async (boardId, setLists) => {
 }
 
 export const createList = async (boardId, listName) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/createList",
         {
             method: 'POST',
@@ -25,7 +23,6 @@ export const createList = async (boardId, listName) => {
 }
 
 export const deleteList = async (listId) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/deleteList",
         {
             method: 'POST',

@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const getUsers = async (setUsers) => {
   await fetch("https://kanbanproject-328107.appspot.com/getUsers")
@@ -7,7 +6,6 @@ export const getUsers = async (setUsers) => {
 }
 
 export const createUser = async (userName) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/createUser",
     {
       method:'POST',
@@ -19,7 +17,6 @@ export const createUser = async (userName) => {
 }
 
 export const deleteUser = async (userId) => {
-    let userArr = []
     await fetch("https://kanbanproject-328107.appspot.com/deleteUser",
         {
             method: 'POST',
