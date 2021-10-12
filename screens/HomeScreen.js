@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, FlatList, Alert, StyleSheet } from 'react-native';
-import { getBoards } from '../components/boardDB';
+import { Text, View, Button, FlatList, Alert, StyleSheet, Modal, TextInput } from 'react-native';
+import { getBoards, createBoard } from '../components/boardDB';
 
 export default function HomeScreen(props){
 
-  const [boards, setBoards] = useState();
+    const [user, setUser] = useState(0);
+    const [boards, setBoards] = useState();
+    const [newBoardName, setBoardName] = useState("");
+    const [addBoard, setAddBoard] = useState(false);
+
+    const nameHandler = (name) => {
+        setBoardName(name);
+    }
+
+    const saveNewBoard = () => {
+        createBoard(user, newBoardName);
+        setAddBoard(!addBoard);
+    }
+
 
   useEffect(() => {
-    getBoards(props.userId, setBoards);
+      getBoards(props.userId, setBoards);
+      setUser(props.userId);
   }, [])
 
   useEffect(
@@ -35,14 +49,30 @@ export default function HomeScreen(props){
     <View style={styles.screen}>
         <Text style={{ fontSize: 30 }}>BOARDS</Text>
         <Button
-            onPress={() => props.navigation.navigate('NewBoard', { userId: props.userId })}
+            onPress={() => setAddBoard(!addBoard)}
             title="ADD NEW BOARD"
         />
         <FlatList data={boards} style={{margin: 10}}
             renderItem={({ item }) => (
-                <View style={styles.element}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId, boardName: item.boardName, userId: props.userId })}>{item.boardName}</Text></View>
+                <View style={styles.padd}><Text style={styles.boardStyle} onPress={() => props.navigation.navigate("BoardScreen", { boardId: item.boardId, boardName: item.boardName, userId: props.userId })}>{item.boardName}</Text></View>
             )}
             keyExtractor={(item) => item.boardId.toString()} />
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={addBoard}>
+                <View style={styles.modal}>
+                    <TextInput style={styles.inputStyle} placeholder="New Board Name" onChangeText={nameHandler} />
+                    <View style={styles.element}>
+                        <View style={styles.padd}>
+                            <Button title="CLOSE" onPress={() => setAddBoard(!addBoard)} />
+                        </View>
+                        <View style={styles.padd}>
+                            <Button title="ADD BOARD" onPress={() => saveNewBoard()} />
+                        </View>
+                    </View>
+                </View>
+        </Modal>
     </View>
     );
 }
@@ -54,8 +84,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
 
-    element: {
+    padd: {
         padding: 10,
+    },
+
+    element: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 
     boardStyle: {
@@ -63,5 +99,28 @@ const styles = StyleSheet.create({
         borderColor: 'green',
         padding: 10,
         width: '100%',
+    },
+
+    modal: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+
+    inputStyle: {
+        borderWidth: 2,
+        borderColor: 'red',
+        padding: 10,
+        width: '80%',
     },
 });
