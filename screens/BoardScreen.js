@@ -36,12 +36,20 @@ export default function BoardScreen(props){
     const addNewList = () => {
         createList(boardId, text1);
         setAddList(!addList);
+        setLists();
+        setTimeout(() => getLists(boardId, setLists), 200);
     }
 
     const createNewCard = () => {
         createCard(listId, text1, text2);
         setAddCard(!addCard);
-        setCount(count + 1);
+        setLists();
+        setTimeout(() => getLists(boardId, setLists), 200);
+    }
+
+    const refreshLists = () => {
+        setLists();
+        setTimeout(() => getLists(boardId, setLists), 200);
     }
 
     const leaveBoard = () => {
@@ -75,6 +83,8 @@ export default function BoardScreen(props){
                     text: 'Remove List',
                     onPress: () => {
                         deleteList(listId);
+                        setLists();
+                        setTimeout(() => getLists(boardId, setLists), 200);
                     },
                 },
             ]
@@ -100,8 +110,14 @@ export default function BoardScreen(props){
     }
 
     useEffect(() => {
-        getLists(boardId, setLists);
         getUsers(setUsers);
+
+        let listener = props.navigation.addListener('focus', () => {
+            console.log('focussed');
+            getLists(boardId, setLists);
+        });
+
+        return () => listener()
     }, [])
 
     return (
@@ -151,7 +167,7 @@ export default function BoardScreen(props){
                         </View>
                     </View>
                     <View style={styles.element}>
-                        <Card listId={item.listId} lists={lists} />
+                        <Card listId={item.listId} lists={lists} onRefreshLists={refreshLists} />
                     </View>
                 </View>
             )}

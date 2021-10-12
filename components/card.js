@@ -24,6 +24,7 @@ export default function Card(props) {
     const moveCard = (listId) => {
         cardToList(listId, id);
         setMoveVisible(!modalMove);
+        setTimeout(() => props.onRefreshLists(), 200);
     }
 
     const cardDeletion = () => {
@@ -39,6 +40,7 @@ export default function Card(props) {
                     onPress: () => {
                         deleteCard(id);
                         setDetailsVisible(!modalDetails);
+                        setTimeout(() => props.onRefreshLists(), 200);
                     },
                 },
             ]
@@ -46,8 +48,8 @@ export default function Card(props) {
     }
 
     useEffect(() => {
-        getCards(props.listId, setCards)
         setLists(props.lists)
+        getCards(props.listId, setCards);
     }, [])
 
     return (

@@ -4,33 +4,23 @@ import { getBoards, createBoard } from '../components/boardDB';
 
 export default function HomeScreen(props){
 
-    const [user, setUser] = useState(0);
     const [boards, setBoards] = useState();
     const [newBoardName, setBoardName] = useState("");
     const [addBoard, setAddBoard] = useState(false);
-    const [reload, setReload] = useState();
-
-
-
-
-
 
     const nameHandler = (name) => {
         setBoardName(name);
     }
 
     const saveNewBoard = () => {
-        createBoard(user, newBoardName);
+        createBoard(props.userId, newBoardName);
         setAddBoard(!addBoard);
         setBoards();
         setTimeout(() => getBoards(props.userId, setBoards), 200);
-        
     }
 
 
   useEffect(() => {
-      setUser(props.userId);
-
       let listener = props.navigation.addListener('focus', () => {
           console.log('focussed');
           getBoards(props.userId, setBoards);
